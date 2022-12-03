@@ -17,39 +17,36 @@ func main() {
 
 	scanner := bufio.NewScanner(file)
 
-	// highestPriority := 0
 	prioritySum := 0
+	badgePrioritySum := 0
+
+	rucksacks := make([]map[rune]bool, 3)
+	rucksackIndex := 0
+
 	for scanner.Scan() {
 		line := scanner.Text()
+		rucksacks[rucksackIndex] = make(map[rune]bool, 3)
 
-		fullSize := len(line)
+		prioritySum += getPriorotyFromLine(line)
 
-		firsCompartment := line[:fullSize/2]
-		secondCompartment := line[fullSize/2:]
-
-		firstMap := make(map[rune]bool, 5)
-		for _, val := range firsCompartment {
-			if firstMap[val] {
-				continue
+		for _, v := range line {
+			if !rucksacks[rucksackIndex][v] {
+				rucksacks[rucksackIndex][v] = true
 			}
-			firstMap[val] = true
 		}
 
-		secondMap := make(map[rune]bool, 5)
-		for _, val := range secondCompartment {
-			if secondMap[val] {
-				continue
-			}
-			secondMap[val] = true
-		}
+		rucksackIndex++
+		if rucksackIndex == 3 {
+			for k := range rucksacks[0] {
+				if !rucksacks[1][k] {
+					continue
+				}
 
-		fmt.Println("---")
-		for k := range firstMap {
-			fmt.Println(k)
-			if secondMap[k] {
-				fmt.Printf("Match: %c value: %d\n", k, getPrioroty(k))
-				prioritySum += getPrioroty(k)
+				if rucksacks[2][k] {
+					badgePrioritySum += getPrioroty(byte(k))
+				}
 			}
+			rucksackIndex = 0
 		}
 
 		// if highestPriority < prioritySum {
@@ -57,14 +54,30 @@ func main() {
 		// }
 	}
 	fmt.Printf("Priority sum: %d\n", prioritySum)
+	fmt.Printf("Bage priority sum: %d\n", badgePrioritySum)
 
 }
 
-func getPrioroty(char rune) int {
+func getPrioroty(char byte) int {
+	// fmt.Println(char)
 	ascii := int(char)
 	if ascii < 91 {
 		return ascii - 38
 	}
 
 	return ascii - 96
+}
+
+func getPriorotyFromLine(line string) int {
+	fullSize := len(line)
+	half := fullSize / 2
+	for i := 0; i < half; i++ {
+		for j := half; j < fullSize; j++ {
+			if line[i] == line[j] {
+				return getPrioroty(line[i])
+			}
+		}
+	}
+
+	return -1
 }
