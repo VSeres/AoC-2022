@@ -22,7 +22,6 @@ func main() {
 	for {
 		bytes, _, err = reader.ReadLine()
 		if err != nil {
-			fmt.Println("ERROR")
 			break
 		}
 		line := string(bytes)
@@ -44,27 +43,28 @@ func main() {
 		} else if fragments[0] != "dir" {
 			var size int
 			size, err = strconv.Atoi(fragments[0])
-			fmt.Println("========")
-			fmt.Println(path)
 			for i := 1; i < len(path)+1; i++ {
 				str := strings.Join(path[:i], "/")
 				if len(str) != 1 {
 					str = str[1:]
 				}
-				fmt.Println(str)
-				fmt.Println(path[:i])
 				sizeMap[str] += size
 			}
 		}
 	}
 	count := 0
+	minMax := 70000000
 	for _, v := range sizeMap {
 		if v <= 100000 {
 			count += v
 		}
+		if v < minMax && v >= 30000000-(70000000-sizeMap["/"]) {
+			minMax = v
+		}
 	}
-
+	fmt.Println()
 	fmt.Println(count)
+	fmt.Println(minMax)
 }
 
 func split(c rune) bool {
