@@ -51,7 +51,6 @@ func main() {
 				if treeMap[sY][x] >= treeMap[y][x] {
 					break
 				}
-
 			}
 
 			for sY := y + 1; sY < 99; sY++ {
