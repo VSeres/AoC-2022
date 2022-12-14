@@ -40,6 +40,7 @@ func main() {
 				distX := headX - tailX
 				if distX > 1 || distX < -1 {
 					tailX = headX - 1
+					tailY = headY
 				}
 				visited[key{tailX, tailY}] = true
 			}
@@ -49,6 +50,7 @@ func main() {
 				distX := headX - tailX
 				if distX > 1 || distX < -1 {
 					tailX = headX + 1
+					tailY = headY
 				}
 				visited[key{tailX, tailY}] = true
 			}
@@ -58,6 +60,7 @@ func main() {
 				distY := headY - tailY
 				if distY > 1 || distY < -1 {
 					tailY = headY + 1
+					tailX = headX
 				}
 				visited[key{tailX, tailY}] = true
 			}
@@ -67,11 +70,12 @@ func main() {
 				distY := headY - tailY
 				if distY > 1 || distY < -1 {
 					tailY = headY - 1
+					tailX = headX
 				}
 				visited[key{tailX, tailY}] = true
 			}
 		}
-		fmt.Printf("-----\ntail: %d %d\nhead: %d %d\n", tailX, tailY, headX, headY)
+		fmt.Printf("-----\n%q\ntail: %d %d\nhead: %d %d\n", command, tailX, tailY, headX, headY)
 	}
 	count := 0
 	for _, v := range visited {
