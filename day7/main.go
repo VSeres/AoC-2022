@@ -62,9 +62,8 @@ func main() {
 			minMax = v
 		}
 	}
-	fmt.Println()
-	fmt.Println(count)
-	fmt.Println(minMax)
+	fmt.Printf("part one: %d\n", count)
+	fmt.Printf("part two: %d\n", minMax)
 }
 
 func split(c rune) bool {
