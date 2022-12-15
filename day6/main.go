@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-const fileName = "file"
+const fileName = "file.txt"
 
 /*
 first task 4

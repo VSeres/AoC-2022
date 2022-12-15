@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-const fileName = "file"
+const fileName = "../file.txt"
 
 type stack []byte
 

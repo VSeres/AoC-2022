@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	file, err := os.Open("file")
+	file, err := os.Open("file.txt")
 
 	if err != nil {
 		return

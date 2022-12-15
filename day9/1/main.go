@@ -11,7 +11,7 @@ import (
 type key [2]int
 
 func main() {
-	file, err := os.Open("commands.txt")
+	file, err := os.Open("../commands.txt")
 	if err != nil {
 		return
 	}

@@ -21,7 +21,7 @@ const sizeY = 690
 var idk = 0
 
 func main() {
-	file, err := os.Open("commands.txt")
+	file, err := os.Open("../commands.txt")
 	if err != nil {
 		return
 	}
