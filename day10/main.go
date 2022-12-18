@@ -45,7 +45,7 @@ func main() {
 	}
 	fmt.Println(sigStrength)
 	for i, v := range screen {
-		if i+1%41 == 0 {
+		if i%40 == 0 {
 			fmt.Println()
 		}
 		fmt.Printf("%c", v)
@@ -55,11 +55,14 @@ func main() {
 
 func caluculateSignal(clock *int, sigStrength *int, x int) {
 	*clock += 1
-	drawPos := *clock % 40
+	drawPos := *clock%40 - 1
+	fmt.Print(drawPos, x)
 	if drawPos >= x-1 && drawPos <= x+1 {
 		screen += "#"
+		fmt.Println("#")
 	} else {
-		screen += "."
+		screen += " "
+		fmt.Println()
 	}
 	if *clock == 20 || *clock == 60 || *clock == 100 || *clock == 140 || *clock == 180 || *clock == 220 {
 		*sigStrength += *clock * x
