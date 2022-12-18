@@ -54,16 +54,13 @@ func main() {
 }
 
 func caluculateSignal(clock *int, sigStrength *int, x int) {
-	*clock += 1
-	drawPos := *clock%40 - 1
-	fmt.Print(drawPos, x)
+	drawPos := *clock % 40
 	if drawPos >= x-1 && drawPos <= x+1 {
 		screen += "#"
-		fmt.Println("#")
 	} else {
 		screen += " "
-		fmt.Println()
 	}
+	*clock += 1
 	if *clock == 20 || *clock == 60 || *clock == 100 || *clock == 140 || *clock == 180 || *clock == 220 {
 		*sigStrength += *clock * x
 	}
