@@ -81,8 +81,11 @@ func main() {
 				} else if monkey.operation[1] == "*" {
 					worryLevel = v1 * v2
 				}
+				// part one
 				// worryLevel /= 3
+				// part two
 				worryLevel %= uint64(simplifier)
+				// ---
 				monkey.inspeted += 1
 				*item = worryLevel
 				if worryLevel%uint64(monkey.test) == 0 {
